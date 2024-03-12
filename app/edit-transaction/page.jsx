@@ -112,9 +112,11 @@ export default function Page() {
       </div>
       <div className="absolute bottom-0 w-full border-t">
         <div className="flex gap-2 p-2 m-2 items-center">
-          <IconComponent title={title} type={type} />
-          <Input type="text" placeholder={title} />
-          <div className="text-left flex items-center">{amount || "0"}</div>
+          <Suspense>
+            <IconComponent title={title} type={type} />
+            <Input type="text" placeholder={title} />
+            <div className="text-left flex items-center">{amount || "0"}</div>
+          </Suspense>
         </div>
 
         <div className="border-t">

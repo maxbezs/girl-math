@@ -2,32 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 0, 0%, 100%; /* White background */
+    --foreground: 340, 25%, 30%; /* Darker pink for readable text */
+    --card: 340, 100%, 86%; /* Soft pink for card backgrounds */
+    --card-foreground: 340, 25%, 30%; /* Darker pink for text on cards */
+    --popover: 340, 100%, 86%; /* Soft pink for popovers */
+    --popover-foreground: 340, 25%, 30%; /* Darker pink for text on popovers */
+    --primary: 340, 100%, 86%; /* Soft pink as the primary color */
+    --primary-foreground: 340, 25%, 30%; /* Darker pink for text/icons on primary elements */
+    --secondary: 340, 100%, 90%; /* Lighter pink for secondary elements */
+    --secondary-foreground: 340, 25%, 20%; /* Even darker pink for text on secondary elements */
+    --muted: 340, 100%, 94%; /* Very light pink for less emphasized elements */
+    --muted-foreground: 340, 25%, 30%; /* Darker pink for text on muted elements */
+    --accent: 345, 100%, 75%; /* Brighter pink for accent elements */
+    --accent-foreground: 0, 0%, 100%; /* White for text/icons on accent elements */
+    --destructive: 355, 85%, 60%; /* Reddish pink for destructive actions */
+    --destructive-foreground: 0, 0%, 100%; /* White for text/icons on destructive elements */
+    --border: 340, 100%, 88%; /* Soft pink for borders */
+    --input: 340, 100%, 86%; /* Soft pink for input fields */
+    --ring: 340, 100%, 86%; /* Soft pink for focus rings */
+    --radius: 0.5rem; /* Border radius for rounded elements */
+  }
+
+  .dark {
+    --background: 325, 25%, 15%; /* Dark pinkish background for dark mode */
+    --foreground: 0, 0%, 98%; /* Very light pink for text in dark mode */
+    --card: 325, 25%, 20%; /* Slightly darker pink for card backgrounds in dark mode */
+    --card-foreground: 0, 0%, 98%; /* Very light pink for text on cards in dark mode */
+    --popover: 325, 25%, 18%; /* Dark pink for popovers in dark mode */
+    --popover-foreground: 0, 0%, 98%; /* Very light pink for text on popovers in dark mode */
+    --primary: 340, 100%, 76%; /* Slightly darker pink for primary elements in dark mode */
+    --primary-foreground: 0, 0%, 98%; /* Very light pink for text/icons on primary elements in dark mode */
+    --secondary: 325, 25%, 30%; /* Muted pink for secondary elements in dark mode */
+    --secondary-foreground: 0, 0%, 98%; /* Very light pink for text on secondary elements in dark mode */
+    --muted: 325, 20%, 25%; /* Dark muted pink for less emphasized elements in dark mode */
+    --muted-foreground: 0, 0%, 98%; /* Very light pink for text on muted elements in dark mode */
+    --accent: 345, 100%, 60%; /* Bright pink for accent elements in dark mode */
+    --accent-foreground: 0, 0%, 98%; /* Very light pink for text/icons on accent elements in dark mode */
+    --destructive: 355, 85%, 40%; /* Dark reddish pink for destructive actions in dark mode */
+    --destructive-foreground: 0, 0%, 98%; /* Very light pink for text/icons on destructive elements in dark mode */
+    --border: 325, 25%, 25%; /* Dark pink for borders in dark mode */
+    --input: 325, 25%, 20%; /* Dark pink for input fields in dark mode */
+    --ring: 340, 100%, 76%; /* Slightly darker pink for focus rings in dark mode */
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

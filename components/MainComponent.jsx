@@ -96,7 +96,7 @@ const MainComponent = ({ currentUser }) => {
         <SideMenu currentUser={currentUser} />
         <MonthPicker onMonthChange={setSelectedMonth} />
         <Button size="icon" asChild>
-          <Link href="/add-transaction">
+          <Link href="/add-edit-transaction">
             <MdAdd />
           </Link>
         </Button>

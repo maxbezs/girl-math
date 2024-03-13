@@ -38,12 +38,10 @@ export default function DialogDynamicContent({ transaction, uid }) {
       <div className="mb-4">
         <div className="text-sm font-semibold">Amount</div>
         <div className="text-lg">{transaction.amount}</div>{" "}
-        {/* Change Amount to amount */}
       </div>
       <div className="mb-4">
         <div className="text-sm font-semibold">Date</div>
         <div className="text-lg">{formatDate(transaction.date)}</div>{" "}
-        {/* Change Date to date */}
       </div>
       <div className="mb-4">
         <div className="text-sm font-semibold">Memo</div>
@@ -53,7 +51,7 @@ export default function DialogDynamicContent({ transaction, uid }) {
         <DialogClose>
           <Link
             className="px-4 py-2 bg-blue-500 text-white rounded"
-            href={`/edit-transaction?id=${transaction.id}&uid=${uid}&title=${transaction.title}&type=${transaction.type}&amount=${transaction.amount}&date=${transaction.date}`}
+            href={`/add-edit-transaction?id=${transaction.id}&uid=${uid}&title=${transaction.title}&type=${transaction.type}&amount=${transaction.amount}&date=${transaction.date}`}
           >
             Edit
           </Link>

@@ -39,7 +39,7 @@ const Page = () => {
       <div className="flex min-h-screen flex-col p-4 w-full">
         <div className="flex justify-between items-center">
           <Button variant="outline" size="icon" asChild>
-            <Link href="/add-transaction">
+            <Link href="/">
               <MdArrowBack />
             </Link>
           </Button>{" "}

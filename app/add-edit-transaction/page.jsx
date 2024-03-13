@@ -1,12 +1,13 @@
-import { MdArrowBack } from "react-icons/md";
+import React from "react";
+import { getCurrentUser } from "@/lib/firebase/firebase-admin";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import CategoryGrid from "@/components/CategoryGrid";
+import { MdArrowBack } from "react-icons/md";
 import TransitionType from "@/components/TransitionType";
+import AddEditTransaction from "@/components/AddEditTransaction";
 import { redirect } from "next/navigation";
 
-import { getCurrentUser } from "@/lib/firebase/firebase-admin";
 const page = async () => {
   const currentUser = await getCurrentUser();
   if (!currentUser) redirect("/sign-in");
@@ -22,13 +23,22 @@ const page = async () => {
           <TransitionType />
         </div>
         <TabsContent value="income">
-          <CategoryGrid type="income" uid={currentUser.uid} />
+          <AddEditTransaction
+            key="income"
+            typee="income"
+            uidd={currentUser.uid}
+          />
         </TabsContent>
         <TabsContent value="expenses">
-          <CategoryGrid type="expenses" uid={currentUser.uid} />
+          <AddEditTransaction
+            key="expenses"
+            typee="expenses"
+            uidd={currentUser.uid}
+          />
         </TabsContent>
       </Tabs>
     </div>
   );
 };
+
 export default page;

@@ -1,30 +1,24 @@
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { updateDoc, doc, getDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase/firebase";
-import IconComponent from "@/components/IconComponent";
-import { format, parseISO } from "date-fns";
-import { MdOutlineCalendarMonth } from "react-icons/md";
-import enUS from "date-fns/locale/en-US"; // Import the locale you want to use
-import { navigate } from "../../components/actions";
-import { MdArrowBack } from "react-icons/md";
-
+import IconComponent from "./IconComponent";
+import { Input } from "./ui/input";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { Input } from "@/components/ui/input";
+
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-export default function Page() {
+import { MdOutlineCalendarMonth } from "react-icons/md";
+import { format } from "date-fns";
+import { handleAddOrUpdateTransaction } from "../app/hooks/transactionHandler";
+
+function AddEditTransaction({ typee, uidd }) {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const uid = searchParams.get("uid");
+  const uid = searchParams.get("uid") || uidd;
   const title0 = searchParams.get("title");
   const type0 = searchParams.get("type");
   const amount0 = searchParams.get("amount");
   const date0 = searchParams.get("date");
-
   const expensesCategories = [
     { title: "Restaurants", type: "expenses" },
     { title: "Rent", type: "expenses" },
@@ -45,28 +39,15 @@ export default function Page() {
     { title: "Investments", type: "income" },
     { title: "Gifts", type: "income" },
   ];
-
-  const categories = "expenses" ? expensesCategories : incomeCategories;
-  const [title, setTitle] = useState(title0);
-
-  const [amount, setAmount] = useState(amount0);
+  const [type, setType] = useState(type0 || typee || "expenses");
+  const [date, setDate] = useState(date0 ? new Date(date0) : new Date());
   const [calendarOpen, setCalendarOpen] = useState(false);
-  const [date, setDate] = useState(new Date(date0));
-  const [type, setType] = useState(type0);
-  const updateTransaction = async (title, amount, date, type) => {
-    try {
-      await updateDoc(doc(db, "users", uid, "transactions", id), {
-        title: title,
-        amount: amount,
-        date: date, // Ensure date is in ISO string format
-        type: type,
-        memo: title,
-      });
-      navigate();
-    } catch (error) {
-      console.error("Error updating transaction: ", error);
-    }
-  };
+  const [amount, setAmount] = useState(amount0 || "");
+  const [title, setTitle] = useState(
+    title0 ? title0 : type === "expenses" ? "Restaurants" : "Salary"
+  );
+  const categories =
+    type === "expenses" ? expensesCategories : incomeCategories;
   const buttonGroups = [
     ["7", "8", "9", ""],
     ["4", "5", "6", "+"],
@@ -77,15 +58,9 @@ export default function Page() {
     setDate(new Date(day));
     setCalendarOpen(false);
   };
+
   return (
-    <Suspense>
-      <div className="flex justify-between p-4">
-        <Button variant="outline" size="icon" asChild>
-          <Link href="/">
-            <MdArrowBack />
-          </Link>
-        </Button>
-      </div>
+    <>
       <div
         style={{
           display: "grid",
@@ -112,11 +87,9 @@ export default function Page() {
       </div>
       <div className="absolute bottom-0 w-full border-t">
         <div className="flex gap-2 p-2 m-2 items-center">
-          <Suspense>
-            <IconComponent title={title} type={type} />
-            <Input type="text" placeholder={title} />
-            <div className="text-left flex items-center">{amount || "0"}</div>
-          </Suspense>
+          <IconComponent title={title} type={type} />
+          <Input type="text" placeholder={title} />
+          <div className="text-left flex items-center">{amount || "0"}</div>
         </div>
 
         <div className="border-t">
@@ -133,7 +106,16 @@ export default function Page() {
                 btn === "✓" ? (
                   <button
                     key={btnIndex}
-                    onClick={() => updateTransaction(title, amount, date, type)}
+                    onClick={() =>
+                      handleAddOrUpdateTransaction(
+                        title,
+                        amount,
+                        date,
+                        type,
+                        id,
+                        uid
+                      )
+                    }
                     className={`p-4 ${btnIndex !== 3 ? "border-r" : ""} ${
                       index !== 3 ? "border-b" : ""
                     }`}
@@ -184,6 +166,8 @@ export default function Page() {
           ))}
         </div>
       </div>
-    </Suspense>
+    </>
   );
 }
+
+export default AddEditTransaction;

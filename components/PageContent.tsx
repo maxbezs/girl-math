@@ -39,7 +39,7 @@ export default function PageContent({
 
   if (variant === "sign-in")
     return (
-      <div className="w-full h-[100vh] flex flex-col items-center text-center justify-evenly p-4">
+      <div className="w-full h-[90vh] flex flex-col items-center text-center justify-evenly p-4">
         <h1 className=" text-2xl	">Your ✨girly✨ way to track 🩷expenses🩷</h1>
         <Image src={SignIn} alt="" />
         <Button onClick={handleSignIn}>

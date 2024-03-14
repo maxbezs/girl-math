@@ -12,7 +12,7 @@ const page = async () => {
   const currentUser = await getCurrentUser();
   if (!currentUser) redirect("/sign-in");
   return (
-    <div className="flex min-h-screen flex-col  w-full">
+    <div className="flex h-full flex-col  w-full">
       <Tabs defaultValue="expenses">
         <div className="flex justify-between p-4">
           <Button variant="outline" size="icon" asChild>

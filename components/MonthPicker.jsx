@@ -80,10 +80,11 @@ const MonthPicker = ({ onMonthChange }) => {
               display: "grid",
               gridTemplateColumns: "repeat(6, auto)",
               gridTemplateRows: "repeat(2, auto)",
+              width: "100%",
             }}
           >
             {getMonthNames().map((monthName, index) => (
-              <DropdownMenuItem className="w-fit p-1" key={index}>
+              <DropdownMenuItem className="w-fit p-2" key={index}>
                 <Button
                   className="p-2 w-full"
                   variant="secondary"

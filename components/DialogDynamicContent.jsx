@@ -27,7 +27,7 @@ export default function DialogDynamicContent({ transaction, uid }) {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 h-fit">
       <div className="flex items-center mb-4 gap-4">
         <IconComponent title={transaction.title} type={transaction.type} />
         <div>

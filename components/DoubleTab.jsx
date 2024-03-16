@@ -7,30 +7,45 @@ import IconComponent from "./IconComponent";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DoubleTab = ({ transactionsData, type, dynamicNumber }) => {
-  const colors = [
-    "#FF6384",
-    "#36A2EB",
-    "#FFCE56",
-    "#4BC0C0",
-    "#9966FF",
-    "#FF8C00",
-    "#00CED1",
-    "#9370DB",
-    "#FF1493",
-    "#32CD32",
+  const baseColors = [
+    "#FFB8CA", // Lightest
+    "#85002A", // Darkest
   ];
 
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+  const generateGradientColors = (colorStart, colorEnd, count) => {
+    if (count === 1) {
+      return [baseColors[0]];
     }
-    return array;
-  };
+    const start = {
+      hex: colorStart,
+      r: parseInt(colorStart.slice(1, 3), 16),
+      g: parseInt(colorStart.slice(3, 5), 16),
+      b: parseInt(colorStart.slice(5, 7), 16),
+    };
+    const end = {
+      hex: colorEnd,
+      r: parseInt(colorEnd.slice(1, 3), 16),
+      g: parseInt(colorEnd.slice(3, 5), 16),
+      b: parseInt(colorEnd.slice(5, 7), 16),
+    };
+    let colors = [];
 
-  const generateRandomColors = (count) => {
-    const shuffledColors = shuffleArray([...colors]);
-    return shuffledColors.slice(0, count);
+    for (let i = 0; i < count; i++) {
+      let r = Math.round(
+        start.r + (end.r - start.r) * (i / (count - 1))
+      ).toString(16);
+      let g = Math.round(
+        start.g + (end.g - start.g) * (i / (count - 1))
+      ).toString(16);
+      let b = Math.round(
+        start.b + (end.b - start.b) * (i / (count - 1))
+      ).toString(16);
+      colors.push(
+        `#${r.padStart(2, "0")}${g.padStart(2, "0")}${b.padStart(2, "0")}`
+      );
+    }
+
+    return colors;
   };
 
   const groupTransactions = (data) => {
@@ -51,8 +66,15 @@ const DoubleTab = ({ transactionsData, type, dynamicNumber }) => {
         return acc;
       }, []);
   };
-
   const groupedData = groupTransactions(transactionsData);
+
+  groupedData.sort((a, b) => b.amount - a.amount);
+
+  const chartColors = generateGradientColors(
+    baseColors[0],
+    baseColors[1],
+    groupedData.length
+  );
 
   const chartData = {
     labels: groupedData.map((transaction) => transaction.title),
@@ -60,7 +82,7 @@ const DoubleTab = ({ transactionsData, type, dynamicNumber }) => {
       {
         label: type.charAt(0).toUpperCase() + type.slice(1),
         data: groupedData.map((transaction) => transaction.amount),
-        backgroundColor: generateRandomColors(groupedData.length),
+        backgroundColor: chartColors.length > 1 ? chartColors : [baseColors[0]], // Check for a single transaction
         borderColor: "#fff",
         borderWidth: 1,
       },

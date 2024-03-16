@@ -7,6 +7,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { DialogClose } from "./ui/dialog";
 import IconComponent from "./IconComponent";
 import Link from "next/link";
+import { Button } from "./ui/button";
 export default function DialogDynamicContent({ transaction, uid }) {
   const formatDate = (dateString) => {
     try {
@@ -49,20 +50,21 @@ export default function DialogDynamicContent({ transaction, uid }) {
       </div>
       <div className="flex justify-end gap-2">
         <DialogClose>
-          <Link
-            className="px-4 py-2 bg-blue-500 text-white rounded"
-            href={`/add-edit-transaction?id=${transaction.id}&uid=${uid}&title=${transaction.title}&type=${transaction.type}&amount=${transaction.amount}&date=${transaction.date}`}
-          >
-            Edit
-          </Link>
-        </DialogClose>
-        <DialogClose>
-          <button
-            className="px-4 py-2 bg-red-500 text-white rounded"
+          <Button
+            variant="destructive"
             onClick={() => handleDelete(transaction.id)}
           >
             Delete
-          </button>
+          </Button>
+        </DialogClose>
+        <DialogClose>
+          <Button asChild>
+            <Link
+              href={`/add-edit-transaction?id=${transaction.id}&uid=${uid}&title=${transaction.title}&type=${transaction.type}&amount=${transaction.amount}&date=${transaction.date}`}
+            >
+              Edit
+            </Link>
+          </Button>
         </DialogClose>
       </div>
     </div>

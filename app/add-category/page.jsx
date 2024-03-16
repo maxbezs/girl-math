@@ -37,6 +37,7 @@ const Page = () => {
   return (
     <Suspense>
       <div className="flex min-h-screen flex-col p-4 w-full">
+        <h1>THIS PAGE DOES NOTHING FOR NOW</h1>
         <div className="flex justify-between items-center">
           <Button variant="outline" size="icon" asChild>
             <Link href="/">

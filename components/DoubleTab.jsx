@@ -6,7 +6,7 @@ import IconComponent from "./IconComponent";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoubleTab = ({ transactionsData, type, dynamicNumber }) => {
+const DoubleTab = ({ transactionsData, type, dynamicNumber, theme }) => {
   const baseColors = [
     "#FFB8CA", // Lightest
     "#85002A", // Darkest
@@ -91,19 +91,25 @@ const DoubleTab = ({ transactionsData, type, dynamicNumber }) => {
 
   return (
     <>
-      <div className=" rounded-md  border border-rose-100 mb-2 p-4">
+      <div className=" rounded-md  border border-muted mb-2 p-4">
         <div className="w-full h-fit">
-          <DoughnutChart data={chartData} dynamicNumber={dynamicNumber} />
+          <DoughnutChart
+            data={chartData}
+            dynamicNumber={dynamicNumber}
+            theme={theme}
+          />
         </div>
       </div>
-      <div className=" rounded-md  border border-rose-100 mb-2">
-        <div className="flex justify-between text-xs bg-rose-100 p-2 ">
+      <div className=" rounded-md  border border-muted mb-2">
+        <div className="flex justify-between text-xs bg-muted p-2 ">
           {type.charAt(0).toUpperCase() + type.slice(1) + "List"}
         </div>
-        {groupedData.map((transaction) => (
+        {groupedData.map((transaction, index) => (
           <div
             key={transaction.id}
-            className="flex justify-between items-center p-2"
+            className={`flex justify-between items-center p-2 ${
+              index < groupedData.length - 1 ? "border-b border-muted" : ""
+            }`}
           >
             <div className="flex items-center gap-2 text-sm">
               <IconComponent

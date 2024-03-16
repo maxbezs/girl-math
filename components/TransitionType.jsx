@@ -18,7 +18,7 @@ const TransitionType = () => {
           Income
         </TabsTrigger>
       </TabsList>
-      <Button variant="outline" size="icon" asChild>
+      <Button variant="outline" size="icon" asChild className="w-0 h-0">
         <Link href={`/add-category?type=${type}`}>
           <MdAdd />
         </Link>

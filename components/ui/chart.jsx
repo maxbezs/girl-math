@@ -5,7 +5,7 @@ import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = ({ data, dynamicNumber }) => {
+const DoughnutChart = ({ data, dynamicNumber, theme }) => {
   const chartRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -18,11 +18,14 @@ const DoughnutChart = ({ data, dynamicNumber }) => {
     const { width, height } = chart.chartArea;
     const centerX = width / 2 + chart.chartArea.left;
     const centerY = height / 2 + chart.chartArea.top - 5; // Adjust for multiple lines
-
+    function getCol() {
+      return theme.theme === "dark" ? "#ffffff" : "#000000";
+    }
     const drawCenterText = () => {
       // Text part 1: "Expenses"
       ctx.font = "14px Arial"; // Customize as needed
-      ctx.fillStyle = "#000"; // Text color
+      ctx.fillStyle = getCol(); // Text color
+      console.log(theme.theme);
       ctx.textAlign = "center";
       ctx.fillText(data.datasets[0].label, centerX, centerY);
 
@@ -33,7 +36,7 @@ const DoughnutChart = ({ data, dynamicNumber }) => {
       const textHeight = parseInt(ctx.font, 10); // Extract font size
 
       // Dynamic text
-      ctx.fillStyle = "#000"; // Text color for dynamic part
+      ctx.fillStyle = getCol(); // Text color for dynamic part
       ctx.fillText(dynamicNumber, centerX, centerY + 20); // Adjust as needed
     };
 

@@ -11,10 +11,13 @@ import { format, parseISO } from "date-fns";
 import TransationComponent from "../components/TransactionComponent";
 import SideMenu from "@/components/SideMenu";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 const MainComponent = ({ currentUser }) => {
   const [transactionsData, setTransactionsData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState(new Date());
+  const theme = useTheme();
+
   async function getTransactionsForMonth(month) {
     const transactionsRef = collection(
       db,
@@ -127,6 +130,7 @@ const MainComponent = ({ currentUser }) => {
             transactionsData={transactionsData}
             type={"income"}
             dynamicNumber={getDynamicNumber("income")}
+            theme={theme}
           />
         </TabsContent>
         <TabsContent value="expenses">
@@ -134,6 +138,7 @@ const MainComponent = ({ currentUser }) => {
             transactionsData={transactionsData}
             type={"expenses"}
             dynamicNumber={getDynamicNumber("expenses")}
+            theme={theme}
           />
         </TabsContent>
         <TabsContent value="balance">

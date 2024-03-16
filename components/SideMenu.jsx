@@ -43,7 +43,7 @@ const SideMenu = ({ currentUser }) => {
 
         <div className="flex flex-col">
           <Separator />
-          <Link
+          {/*<Link
             href={"/add-category?type=expenses"}
             className="flex items-center py-2 gap-2"
           >
@@ -55,7 +55,7 @@ const SideMenu = ({ currentUser }) => {
             <MdUpload size="18" />
             Export
           </div>{" "}
-          <Separator />
+          <Separator />*/}
           <ModeToggle></ModeToggle>
         </div>
       </SheetContent>

@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Girly Math",
+  title: "🌸 Girly Math 🌸",
   description:
     "Girl Math - app to track your girly expenses using girly app online for free",
 };

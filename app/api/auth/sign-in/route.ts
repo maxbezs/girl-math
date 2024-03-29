@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
   const reqBody = (await request.json()) as { idToken: string };
   const idToken = reqBody.idToken;
 
-  const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
+  const expiresIn = 60 * 60 * 24 * 14 * 1000; // 5 days
 
   const sessionCookie = await createSessionCookie(idToken, { expiresIn });
 

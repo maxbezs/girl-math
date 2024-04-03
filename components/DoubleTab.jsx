@@ -118,7 +118,9 @@ const DoubleTab = ({ transactionsData, type, dynamicNumber, theme }) => {
               />
               {transaction.title}
             </div>
-            <div className="text-sm">{transaction.amount}</div>
+            <div className="text-sm">
+              {Math.round(transaction.amount * 100) / 100}
+            </div>
           </div>
         ))}
       </div>

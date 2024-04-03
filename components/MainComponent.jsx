@@ -120,7 +120,10 @@ const MainComponent = ({ currentUser }) => {
             <div>
               Balance:{" "}
               <div>
-                {getDynamicNumber("income") - getDynamicNumber("expenses")}
+                {Math.round(
+                  (getDynamicNumber("income") - getDynamicNumber("expenses")) *
+                    100
+                ) / 100}
               </div>
             </div>
           </TabsTrigger>
@@ -129,7 +132,7 @@ const MainComponent = ({ currentUser }) => {
           <DoubleTab
             transactionsData={transactionsData}
             type={"income"}
-            dynamicNumber={getDynamicNumber("income")}
+            dynamicNumber={Math.round(getDynamicNumber("income") * 100) / 100}
             theme={theme}
           />
         </TabsContent>
@@ -137,7 +140,7 @@ const MainComponent = ({ currentUser }) => {
           <DoubleTab
             transactionsData={transactionsData}
             type={"expenses"}
-            dynamicNumber={getDynamicNumber("expenses")}
+            dynamicNumber={Math.round(getDynamicNumber("expenses") * 100) / 100}
             theme={theme}
           />
         </TabsContent>

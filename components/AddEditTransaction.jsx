@@ -90,7 +90,9 @@ function AddEditTransaction({ typee, uidd }) {
         <div className="flex gap-2 p-2 m-2 items-center">
           <IconComponent title={title} type={type} />
           <Input type="text" placeholder={title} />
-          <div className="text-left flex items-center">{amount || "0"}</div>
+          <div className="text-left flex items-center">
+            {Math.round(amount * 100) / 100 || "0"}
+          </div>
         </div>
 
         <div className="border-t">

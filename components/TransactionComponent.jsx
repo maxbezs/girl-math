@@ -9,8 +9,7 @@ const TransactionComponent = ({ transactionSummary, uid }) => {
           <div className="flex justify-between w-full text-xs  bg-muted p-2">
             <h2>{date}</h2>
             <div className="transaction-summary-label">
-              Income: {summary.totalIncome} Expenses:
-              {summary.totalExpenses}
+              Income: {summary.totalIncome} Expenses: {summary.totalExpenses}
             </div>
           </div>
           {summary.transactions.map((transaction, index) => (

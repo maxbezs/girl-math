@@ -31,6 +31,7 @@ function AddEditTransaction({ typee, uidd }) {
     { title: "Beauty", type: "expenses" },
     { title: "Cloth", type: "expenses" },
     { title: "Delivery", type: "expenses" },
+    { title: "Date", type: "expenses" },
   ];
 
   const incomeCategories = [

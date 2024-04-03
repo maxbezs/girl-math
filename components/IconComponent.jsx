@@ -16,6 +16,8 @@ import { IoGiftSharp } from "react-icons/io5";
 import { IoMdShirt } from "react-icons/io";
 import { BsCash } from "react-icons/bs";
 import { FaBitcoin } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
+
 const getCategoryIcon = (title, type) => {
   const categories =
     type === "expenses" ? expensesCategories : incomeCategories;
@@ -57,6 +59,7 @@ const expensesCategories = [
   { title: "Beauty", icon: <MdFaceRetouchingNatural size="24" /> },
   { title: "Cloth", icon: <IoMdShirt size="24" /> },
   { title: "Delivery", icon: <MdFoodBank size="24" /> },
+  { title: "Date", icon: <FaHeart size="24" /> },
 ];
 
 const incomeCategories = [

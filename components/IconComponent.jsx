@@ -17,7 +17,7 @@ import { IoMdShirt } from "react-icons/io";
 import { BsCash } from "react-icons/bs";
 import { FaBitcoin } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
-
+import { MdSavings } from "react-icons/md";
 const getCategoryIcon = (title, type) => {
   const categories =
     type === "expenses" ? expensesCategories : incomeCategories;
@@ -60,6 +60,7 @@ const expensesCategories = [
   { title: "Cloth", icon: <IoMdShirt size="24" /> },
   { title: "Delivery", icon: <MdFoodBank size="24" /> },
   { title: "Date", icon: <FaHeart size="24" /> },
+  { title: "Savings", icon: <MdSavings size="24"/>},
 ];
 
 const incomeCategories = [

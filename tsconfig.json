@@ -28,6 +28,6 @@
     ".next/types/**/*.ts",
     "app/page.jsx",
     "components/ui/chart.jsx"
-  ],
+, "app/layout.jsx"  ],
   "exclude": ["node_modules"]
 }
